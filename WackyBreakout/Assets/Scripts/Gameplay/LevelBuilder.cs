@@ -24,17 +24,19 @@ public class LevelBuilder : MonoBehaviour
         float screenWidth = ScreenUtils.ScreenRight - ScreenUtils.ScreenLeft;
         int blocksPerRow = (int)(screenWidth / blockWidth);
         float levelWidth = blocksPerRow * blockWidth;
-        float leftBlockOffset = ScreenUtils.ScreenLeft + 
-            (screenWidth - levelWidth) / 2 + 
+        float leftBlockOffset = ScreenUtils.ScreenLeft +
+            (screenWidth - levelWidth) / 2 +
             blockWidth / 2;
-        float topRowOffset = ScreenUtils.ScreenTop - 
-            (ScreenUtils.ScreenTop - ScreenUtils.ScreenBottom) / 5 - 
+        float topRowOffset = ScreenUtils.ScreenTop -
+            (ScreenUtils.ScreenTop - ScreenUtils.ScreenBottom) / 5 -
             blockHeight / 2;
 
         // add rows
         Vector2 currPosition = new Vector2(leftBlockOffset, topRowOffset);
-        for (int row = 0; row < 3; row++) {
-            for (int col = 0; col < blocksPerRow; col++) {
+        for (int row = 0; row < 3; row++)
+        {
+            for (int col = 0; col < blocksPerRow; col++)
+            {
                 Instantiate(prefabBlock, currPosition, Quaternion.identity);
                 currPosition.x += blockWidth;
             }

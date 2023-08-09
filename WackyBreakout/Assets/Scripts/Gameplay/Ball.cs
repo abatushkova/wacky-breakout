@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class Ball : MonoBehaviour
 {
+    #region Fields
+    Timer deathTimer;
+    #endregion
+
     #region Methods
     // Start is called before the first frame update
     void Start()
@@ -14,12 +18,20 @@ public class Ball : MonoBehaviour
             ConfigurationUtils.BallImpulseForce * Mathf.Cos(angle),
             ConfigurationUtils.BallImpulseForce * Mathf.Sin(angle));
         GetComponent<Rigidbody2D>().AddForce(force);
+
+        // start death timer
+        deathTimer = gameObject.AddComponent<Timer>();
+        deathTimer.Duration = ConfigurationUtils.BallLifeSeconds;
+        deathTimer.Run();
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        // destroy ball
+        if (deathTimer.Finished) {
+            Destroy(gameObject);
+        }
     }
 
     /// <summary>
