@@ -8,8 +8,8 @@ public class Ball : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // get ball moving at 20 degree
-        float angle = -90 * Mathf.Rad2Deg;
+        // get ball moving at 20 degree (bottom-left)
+        float angle = 90 * Mathf.Rad2Deg;
         Vector2 force = new Vector2(
             ConfigurationUtils.BallImpulseForce * Mathf.Cos(angle),
             ConfigurationUtils.BallImpulseForce * Mathf.Sin(angle));
@@ -19,7 +19,7 @@ public class Ball : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     /// <summary>
