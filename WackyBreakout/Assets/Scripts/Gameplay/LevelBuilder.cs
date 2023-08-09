@@ -5,14 +5,19 @@ using UnityEngine;
 public class LevelBuilder : MonoBehaviour
 {
     #region Fields
+
     [SerializeField] GameObject prefabPaddle;
     [SerializeField] GameObject prefabBlock;
+
     #endregion
 
     #region Methods
+
     // Start is called before the first frame update
     void Start()
     {
+        Instantiate<GameObject>(prefabPaddle);
+
         // get block width, height
         GameObject tempBlock = Instantiate<GameObject>(prefabPaddle);
         BoxCollider2D collider = tempBlock.GetComponent<BoxCollider2D>();
@@ -52,5 +57,6 @@ public class LevelBuilder : MonoBehaviour
     {
 
     }
+
     #endregion
 }

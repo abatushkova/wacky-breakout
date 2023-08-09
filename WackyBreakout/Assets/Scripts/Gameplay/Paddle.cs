@@ -5,12 +5,15 @@ using UnityEngine;
 public class Paddle : MonoBehaviour
 {
     #region Fields
+
     Rigidbody2D rb2d;
     float colliderHalfWidth;
     const float BounceAngleHalfRange = 60 * Mathf.Deg2Rad;
+
     #endregion
 
     #region Methods
+
     // Start is called before the first frame update
     void Start()
     {
@@ -94,5 +97,6 @@ public class Paddle : MonoBehaviour
         collision.GetContacts(contacts);
         return Mathf.Abs(contacts[0].point.y - contacts[1].point.y) < tolerance;
     }
+
     #endregion
 }

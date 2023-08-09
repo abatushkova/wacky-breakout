@@ -5,6 +5,7 @@ using UnityEngine;
 public class Block : MonoBehaviour
 {
     #region Methods
+
     // Start is called before the first frame update
     void Start()
     {
@@ -24,5 +25,6 @@ public class Block : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
     #endregion
 }

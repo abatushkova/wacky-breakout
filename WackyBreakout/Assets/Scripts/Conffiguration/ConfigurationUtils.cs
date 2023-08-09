@@ -8,7 +8,7 @@ using UnityEngine;
 public static class ConfigurationUtils
 {
     #region Properties
-    
+
     /// <summary>
     /// Gets the paddle move units per second
     /// </summary>
@@ -23,10 +23,32 @@ public static class ConfigurationUtils
     /// </summary>
     public static float BallImpulseForce
     {
-        get { return 300; }
+        get { return 200; }
     }
 
+    /// <summary>
+    /// Gets seconds the ball lives
+    /// </summary>
+    /// <value></value>
     public static float BallLifeSeconds
+    {
+        get { return 10; }
+    }
+
+    /// <summary>
+    /// Gets min seconds for a ball to spawn
+    /// </summary>
+    /// <value></value>
+    public static float MinSpawnSeconds
+    {
+        get { return 5; }
+    }
+
+    /// <summary>
+    /// Gets max seconds for a ball to spawn
+    /// </summary>
+    /// <value></value>
+    public static float MaxSpawnSeconds
     {
         get { return 10; }
     }

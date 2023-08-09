@@ -5,19 +5,21 @@ using UnityEngine;
 public class Ball : MonoBehaviour
 {
     #region Fields
+
+    Timer delayTimer;
     Timer deathTimer;
+
     #endregion
 
     #region Methods
+
     // Start is called before the first frame update
     void Start()
     {
-        // get ball moving at 20 degree (bottom-left)
-        float angle = 90 * Mathf.Rad2Deg;
-        Vector2 force = new Vector2(
-            ConfigurationUtils.BallImpulseForce * Mathf.Cos(angle),
-            ConfigurationUtils.BallImpulseForce * Mathf.Sin(angle));
-        GetComponent<Rigidbody2D>().AddForce(force);
+        // start delay timer
+        delayTimer = gameObject.AddComponent<Timer>();
+        delayTimer.Duration = 1;
+        delayTimer.Run();
 
         // start death timer
         deathTimer = gameObject.AddComponent<Timer>();
@@ -28,8 +30,29 @@ public class Ball : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // destroy ball
-        if (deathTimer.Finished) {
+        // move ball after delay
+        if (delayTimer.Finished)
+        {
+            delayTimer.Stop();
+            StartMoving();
+        }
+
+        // spawn new ball, destroy prev ball
+        if (deathTimer.Finished)
+        {
+            Camera.main.GetComponent<BallSpawner>().SpawnBall();
+            Destroy(gameObject);
+        }
+    }
+
+    private void OnBecameInvisible() {
+        if (!deathTimer.Finished)
+        {
+            float colliderHalfSize = gameObject.GetComponent<CircleCollider2D>().radius / 2;
+            if (transform.position.y - colliderHalfSize < ScreenUtils.ScreenBottom)
+            {
+                Camera.main.GetComponent<BallSpawner>().SpawnBall();
+            }
             Destroy(gameObject);
         }
     }
@@ -44,5 +67,19 @@ public class Ball : MonoBehaviour
         float speed = rb2d.velocity.magnitude;
         rb2d.velocity = direction * speed;
     }
+
+    /// <summary>
+    /// Starts ball moving
+    /// </summary>
+    private void StartMoving()
+    {
+        // get ball moving
+        float angle = Random.Range(-60, -90) * Mathf.Rad2Deg;
+        Vector2 force = new Vector2(
+            ConfigurationUtils.BallImpulseForce * Mathf.Cos(angle),
+            ConfigurationUtils.BallImpulseForce * Mathf.Sin(angle));
+        GetComponent<Rigidbody2D>().AddForce(force);
+    }
+
     #endregion
 }
