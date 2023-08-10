@@ -7,6 +7,10 @@ using UnityEngine;
 /// </summary>
 public static class ConfigurationUtils
 {
+    #region Fields
+    static ConfigurationData configData;
+    #endregion
+
     #region Properties
 
     /// <summary>
@@ -15,7 +19,7 @@ public static class ConfigurationUtils
     /// <value>paddle move units per second</value>
     public static float PaddleMoveUnitsPerSecond
     {
-        get { return 10; }
+        get { return configData.PaddleMoveUnitsPerSecond; }
     }
 
     /// <summary>
@@ -23,7 +27,7 @@ public static class ConfigurationUtils
     /// </summary>
     public static float BallImpulseForce
     {
-        get { return 200; }
+        get { return configData.BallImpulseForce; }
     }
 
     /// <summary>
@@ -32,7 +36,7 @@ public static class ConfigurationUtils
     /// <value></value>
     public static float BallLifeSeconds
     {
-        get { return 10; }
+        get { return configData.BallLifeSeconds; }
     }
 
     /// <summary>
@@ -41,7 +45,7 @@ public static class ConfigurationUtils
     /// <value></value>
     public static float MinSpawnSeconds
     {
-        get { return 5; }
+        get { return configData.MinSpawnSeconds; }
     }
 
     /// <summary>
@@ -50,7 +54,7 @@ public static class ConfigurationUtils
     /// <value></value>
     public static float MaxSpawnSeconds
     {
-        get { return 10; }
+        get { return configData.MaxSpawnSeconds; }
     }
 
     #endregion
@@ -60,6 +64,6 @@ public static class ConfigurationUtils
     /// </summary>
     public static void Initialize()
     {
-
+        configData = new ConfigurationData();
     }
 }
