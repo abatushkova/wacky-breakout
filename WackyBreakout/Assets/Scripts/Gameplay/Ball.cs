@@ -45,12 +45,14 @@ public class Ball : MonoBehaviour
         }
     }
 
-    private void OnBecameInvisible() {
+    private void OnBecameInvisible()
+    {
         if (!deathTimer.Finished)
         {
             float colliderHalfSize = gameObject.GetComponent<CircleCollider2D>().radius / 2;
             if (transform.position.y - colliderHalfSize < ScreenUtils.ScreenBottom)
             {
+                HUD.LoseBall();
                 Camera.main.GetComponent<BallSpawner>().SpawnBall();
             }
             Destroy(gameObject);

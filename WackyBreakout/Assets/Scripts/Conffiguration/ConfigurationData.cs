@@ -19,6 +19,8 @@ public class ConfigurationData
     float ballLifeSeconds = 10;
     float minSpawnSeconds = 5;
     float maxSpawnSeconds = 10;
+    int ballsPerGame = 5;
+    int standardBlockPoints = 1;
 
     #endregion
 
@@ -108,6 +110,24 @@ public class ConfigurationData
         get { return maxSpawnSeconds; }
     }
 
+    /// <summary>
+    /// Gets the number of balls per game
+    /// </summary>
+    /// <value></value>
+    public int BallsPerGame
+    {
+        get { return ballsPerGame; }
+    }
+
+    /// <summary>
+    /// Gets points of standard block
+    /// </summary>
+    /// <value></value>
+    public int StandardBlockPoints
+    {
+        get { return standardBlockPoints; }
+    }
+
     #endregion
 
     #region Methods
@@ -123,6 +143,8 @@ public class ConfigurationData
         ballLifeSeconds = float.Parse(values[2]);
         minSpawnSeconds = float.Parse(values[3]);
         maxSpawnSeconds = float.Parse(values[4]);
+        ballsPerGame = int.Parse(values[5]);
+        standardBlockPoints = int.Parse(values[6]);
     }
 
     #endregion

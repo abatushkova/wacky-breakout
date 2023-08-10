@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1966156084330136357}
   - component: {fileID: 2762807574505982521}
   - component: {fileID: 4415455156674960467}
-  - component: {fileID: -8026847796894367588}
+  - component: {fileID: 1614780632006653337}
   m_Layer: 0
   m_Name: StandardBlock
   m_TagString: Untagged
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 2a07efca9bd524f24afdbc75bcd74bd9, type: 3}
-  m_Color: {r: 1, g: 0.7722037, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -131,7 +131,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 3.2820256, y: 0.40842342}
   m_EdgeRadius: 0
---- !u!114 &-8026847796894367588
+--- !u!114 &1614780632006653337
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -140,6 +140,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 8832481633029622085}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 998e3233cbc8947788d1937da7db57d4, type: 3}
+  m_Script: {fileID: 11500000, guid: f881d90646b5448758a685767f1e6a33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sprite01: {fileID: 21300000, guid: 5ea6adf54807244adb05eb9735bf42e6, type: 3}
+  sprite02: {fileID: 21300000, guid: f131d285c82324dd786711ca2ed368e4, type: 3}
+  sprite03: {fileID: 21300000, guid: 2a07efca9bd524f24afdbc75bcd74bd9, type: 3}

@@ -57,6 +57,24 @@ public static class ConfigurationUtils
         get { return configData.MaxSpawnSeconds; }
     }
 
+    /// <summary>
+    /// Gets the number of balls per game
+    /// </summary>
+    /// <value></value>
+    public static int BallsPerGame
+    {
+        get { return configData.BallsPerGame; }
+    }
+
+    /// <summary>
+    /// Gets points of standard block
+    /// </summary>
+    /// <value></value>
+    public static int StandardBlockPoints
+    {
+        get { return configData.StandardBlockPoints; }
+    }
+
     #endregion
 
     /// <summary>

@@ -4,6 +4,25 @@ using UnityEngine;
 
 public class Block : MonoBehaviour
 {
+    #region Fields
+
+    int points;
+
+    #endregion
+
+    #region Properties
+
+    /// <summary>
+    /// Sets points the block is worth
+    /// </summary>
+    /// <value></value>
+    protected int Points
+    {
+        set { points = value; }
+    }
+
+    #endregion
+
     #region Methods
 
     // Start is called before the first frame update
@@ -22,6 +41,7 @@ public class Block : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Ball"))
         {
+            HUD.AddPoints(points);
             Destroy(gameObject);
         }
     }
