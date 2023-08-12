@@ -7,7 +7,14 @@ public class LevelBuilder : MonoBehaviour
     #region Fields
 
     [SerializeField] GameObject prefabPaddle;
-    [SerializeField] GameObject prefabBlock;
+    [SerializeField] GameObject prefabStandardBlock;
+    [SerializeField] GameObject prefabBonusBlock;
+    [SerializeField] GameObject prefabEffectBlock;
+
+    // config support
+    float standardProbability = 0;
+    float bonusProbability = 0;
+    float freezeProbability = 0;
 
     #endregion
 
@@ -16,7 +23,13 @@ public class LevelBuilder : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // add paddle to scene
         Instantiate<GameObject>(prefabPaddle);
+
+        // set probabilities
+        standardProbability = ConfigurationUtils.StandardBlockProbability;
+        bonusProbability = ConfigurationUtils.BonucBlockProbability;
+        freezeProbability = ConfigurationUtils.FreezeBlockProbability;
 
         // get block width, height
         GameObject tempBlock = Instantiate<GameObject>(prefabPaddle);
@@ -42,7 +55,7 @@ public class LevelBuilder : MonoBehaviour
         {
             for (int col = 0; col < blocksPerRow; col++)
             {
-                Instantiate(prefabBlock, currPosition, Quaternion.identity);
+                PlaceBlock(currPosition);
                 currPosition.x += blockWidth;
             }
 
@@ -56,6 +69,39 @@ public class LevelBuilder : MonoBehaviour
     void Update()
     {
 
+    }
+
+    /// <summary>
+    /// Places random block at given position
+    /// </summary>
+    /// <param name="position"></param>
+    private void PlaceBlock(Vector2 position)
+    {
+        float randomProbability = Random.value;
+        if (randomProbability < standardProbability)
+        {
+            Instantiate(prefabStandardBlock, position, Quaternion.identity);
+        }
+        else if (randomProbability < standardProbability + bonusProbability)
+        {
+            Instantiate(prefabBonusBlock, position, Quaternion.identity);
+        }
+        else
+        {
+            // select effect block
+            GameObject effectBlockPrefab = Instantiate(prefabEffectBlock, position, Quaternion.identity);
+            EffectBlock effectBlock = effectBlockPrefab.GetComponent<EffectBlock>();
+
+            // set effect
+            if (randomProbability < standardProbability + bonusProbability + freezeProbability)
+            {
+                effectBlock.Effect = EffectName.Freezer;
+            }
+            else
+            {
+                effectBlock.Effect = EffectName.Speedup;
+            }
+        }
     }
 
     #endregion

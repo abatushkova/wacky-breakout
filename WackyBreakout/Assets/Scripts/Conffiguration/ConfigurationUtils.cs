@@ -75,6 +75,56 @@ public static class ConfigurationUtils
         get { return configData.StandardBlockPoints; }
     }
 
+    /// <summary>
+    /// Gets points of bonus block
+    /// </summary>
+    /// <value></value>
+    public static int BonusBlockPoints
+    {
+        get { return configData.BonusBlockPoints; }
+    }
+
+    /// <summary>
+    /// Gets points of effect block
+    /// </summary>
+    /// <value></value>
+    public static int EffectBlockPoints
+    {
+        get { return configData.EffectBlockPoints; }
+    }
+
+    /// <summary>
+    /// Gets probability of adding standard block
+    /// </summary>
+    /// <value></value>
+    public static float StandardBlockProbability {
+        get { return configData.StandardBlockProbability; }
+    }
+    
+    /// <summary>
+    /// Gets probability of adding bonus block
+    /// </summary>
+    /// <value></value>
+    public static float BonucBlockProbability {
+        get { return configData.BonucBlockProbability; }
+    }
+    
+    /// <summary>
+    /// Gets probability of adding freeze block
+    /// </summary>
+    /// <value></value>
+    public static float FreezeBlockProbability {
+        get { return configData.FreezeBlockProbability; }
+    }
+    
+    /// <summary>
+    /// Gets probability of adding speed block
+    /// </summary>
+    /// <value></value>
+    public static float SpeedBlockProbability {
+        get { return configData.SpeedBlockProbability; }
+    }
+
     #endregion
 
     /// <summary>

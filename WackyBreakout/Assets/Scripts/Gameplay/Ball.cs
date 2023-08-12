@@ -76,7 +76,7 @@ public class Ball : MonoBehaviour
     private void StartMoving()
     {
         // get ball moving
-        float angle = Random.Range(-60, -90) * Mathf.Rad2Deg;
+        float angle = Random.Range(-90, -100) * Mathf.Rad2Deg;
         Vector2 force = new Vector2(
             ConfigurationUtils.BallImpulseForce * Mathf.Cos(angle),
             ConfigurationUtils.BallImpulseForce * Mathf.Sin(angle));

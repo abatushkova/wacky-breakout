@@ -14,13 +14,19 @@ public class ConfigurationData
     const string ConfigDataFileName = "ConfigurationData.csv";
 
     // configuration data
-    float paddleMoveUnitsPerSecond = 0;
+    float paddleMoveUnitsPerSecond = 10;
     float ballImpulseForce = 200;
     float ballLifeSeconds = 10;
     float minSpawnSeconds = 5;
     float maxSpawnSeconds = 10;
     int ballsPerGame = 5;
     int standardBlockPoints = 1;
+    int bonusBlockPoints = 2;
+    int effectBlockPoints = 5;
+    float standardBlockProbability = 0.7f;
+    float bonusBlockProbability = 0.2f;
+    float freezeBlockProbability = 0.05f;
+    float speedBlockProbability = 0.05f;
 
     #endregion
 
@@ -44,7 +50,6 @@ public class ConfigurationData
             // get key-value input data
             string keys = input.ReadLine();
             string values = input.ReadLine();
-            Console.WriteLine(keys);
 
             SetConfigDataFields(values);
         }
@@ -128,6 +133,56 @@ public class ConfigurationData
         get { return standardBlockPoints; }
     }
 
+    /// <summary>
+    /// Gets points of bonus block
+    /// </summary>
+    /// <value></value>
+    public int BonusBlockPoints
+    {
+        get { return bonusBlockPoints; }
+    }
+
+    /// <summary>
+    /// Gets points of effect block
+    /// </summary>
+    /// <value></value>
+    public int EffectBlockPoints
+    {
+        get { return effectBlockPoints; }
+    }
+
+    /// <summary>
+    /// Gets probability of adding standard block
+    /// </summary>
+    /// <value></value>
+    public float StandardBlockProbability {
+        get { return standardBlockProbability; }
+    }
+    
+    /// <summary>
+    /// Gets probability of adding bonus block
+    /// </summary>
+    /// <value></value>
+    public float BonucBlockProbability {
+        get { return bonusBlockProbability; }
+    }
+    
+    /// <summary>
+    /// Gets probability of adding freeze block
+    /// </summary>
+    /// <value></value>
+    public float FreezeBlockProbability {
+        get { return freezeBlockProbability; }
+    }
+    
+    /// <summary>
+    /// Gets probability of adding speed block
+    /// </summary>
+    /// <value></value>
+    public float SpeedBlockProbability {
+        get { return speedBlockProbability; }
+    }
+
     #endregion
 
     #region Methods
@@ -145,6 +200,12 @@ public class ConfigurationData
         maxSpawnSeconds = float.Parse(values[4]);
         ballsPerGame = int.Parse(values[5]);
         standardBlockPoints = int.Parse(values[6]);
+        bonusBlockPoints = int.Parse(values[7]);
+        effectBlockPoints = int.Parse(values[8]);
+        standardBlockProbability = float.Parse(values[9]) / 100;
+        bonusBlockProbability = float.Parse(values[10]) / 100;
+        freezeBlockProbability = float.Parse(values[11]) / 100;
+        speedBlockProbability = float.Parse(values[12]) / 100;
     }
 
     #endregion

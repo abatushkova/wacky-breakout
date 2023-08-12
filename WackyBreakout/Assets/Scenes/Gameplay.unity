@@ -159,7 +159,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
   m_AnchoredPosition: {x: -240, y: 240}
-  m_SizeDelta: {x: 300, y: 50}
+  m_SizeDelta: {x: 350, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &25405821
 MonoBehaviour:
@@ -504,7 +504,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefabPaddle: {fileID: 2193399383388446832, guid: a881cd19665704f4aa1c6c91b91a9325, type: 3}
-  prefabBlock: {fileID: 8832481633029622085, guid: e22222915a8224c408ac1732e059da23, type: 3}
+  prefabStandardBlock: {fileID: 8832481633029622085, guid: e22222915a8224c408ac1732e059da23, type: 3}
+  prefabBonusBlock: {fileID: 7232640157257458775, guid: d21d965af87694985b2a19c9398213b1, type: 3}
+  prefabEffectBlock: {fileID: 5616050639771867186, guid: 20bd5211aa02549059ca569fad20dc8d, type: 3}
 --- !u!114 &519420038
 MonoBehaviour:
   m_ObjectHideFlags: 0
