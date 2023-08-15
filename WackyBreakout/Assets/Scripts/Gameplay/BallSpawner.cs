@@ -44,6 +44,10 @@ public class BallSpawner : MonoBehaviour
         spawnTimer.Duration = GetSpawnDelay();
         spawnTimer.Run();
 
+        // add listeners
+        EventManager.AddBallDiedListener(SpawnBall);
+        EventManager.AddBallLostListener(SpawnBall);
+
         // spawn first ball
         SpawnBall();
     }
@@ -68,9 +72,17 @@ public class BallSpawner : MonoBehaviour
     }
 
     /// <summary>
+    /// Gets spawn dela in seconds for next ball spawn
+    /// </summary>
+    private float GetSpawnDelay()
+    {
+        return ConfigurationUtils.MinSpawnSeconds + Random.value * spawnRange;
+    }
+
+    /// <summary>
     /// Spawns a ball
     /// </summary>
-    public void SpawnBall()
+    private void SpawnBall()
     {
         // avoid balls collision on spawn
         if (Physics2D.OverlapArea(spawnLocationMin, spawnLocationMax) == null) {
@@ -81,14 +93,6 @@ public class BallSpawner : MonoBehaviour
         {
             retrySpawn = true;
         }
-    }
-
-    /// <summary>
-    /// Gets spawn dela in seconds for next ball spawn
-    /// </summary>
-    private float GetSpawnDelay()
-    {
-        return ConfigurationUtils.MinSpawnSeconds + Random.value * spawnRange;
     }
 
     #endregion

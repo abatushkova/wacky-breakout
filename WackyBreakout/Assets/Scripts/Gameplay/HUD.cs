@@ -36,6 +36,9 @@ public class HUD : MonoBehaviour
         score = 0;
         scoreText = scoreTextObject.GetComponent<TextMeshProUGUI>();
         scoreText.text = ScorePrefix + score.ToString();
+
+        // add listeners
+        EventManager.AddBallLostListener(LoseBall);
     }
 
     // Update is called once per frame
@@ -47,7 +50,7 @@ public class HUD : MonoBehaviour
     /// <summary>
     /// Reduce the number of balls left
     /// </summary>
-    public static void LoseBall()
+    private void LoseBall()
     {
         ballsLeft--;
         ballsLeftText.text = BallsLeftPrefix + ballsLeft.ToString();
