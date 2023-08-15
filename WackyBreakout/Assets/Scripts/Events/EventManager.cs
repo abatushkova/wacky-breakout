@@ -19,6 +19,10 @@ public static class EventManager
     static List<Block> pointsAddedInvokers = new List<Block>();
     static List<UnityAction<int>> pointsAddedListeners = new List<UnityAction<int>>();
 
+    // freeze effect support
+    static List<EffectBlock> freezeInvokers = new List<EffectBlock>();
+    static List<UnityAction<float>> freezeListeners = new List<UnityAction<float>>();
+
     #endregion
 
     #region Methods
@@ -121,6 +125,36 @@ public static class EventManager
     /// <param name="invoker"></param>
     public static void RemovePointsAddedInvoker(Block invoker) {
         pointsAddedInvokers.Remove(invoker);
+    }
+
+    /// <summary>
+    /// Adds all listeners to invoker, invoker to list
+    /// </summary>
+    /// <param name="invoker"></param>
+    public static void AddFreezeInvoker(EffectBlock invoker) {
+        freezeInvokers.Add(invoker);
+        foreach (UnityAction<float> listener in freezeListeners) {
+            invoker.AddFreezeListener(listener);
+        }
+    }
+
+    /// <summary>
+    /// Adds listener to all invokers, listener to list
+    /// </summary>
+    /// <param name="listener"></param>
+    public static void AddFreezeListener(UnityAction<float> listener) {
+        freezeListeners.Add(listener);
+        foreach (EffectBlock invoker in freezeInvokers) {
+            invoker.AddFreezeListener(listener);
+        }
+    }
+
+    /// <summary>
+    /// Removes invoker from list
+    /// </summary>
+    /// <param name="invoker"></param>
+    public static void RemoveFreezeInvoker(EffectBlock invoker) {
+        freezeInvokers.Remove(invoker);
     }
 
     #endregion

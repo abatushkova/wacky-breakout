@@ -97,32 +97,41 @@ public static class ConfigurationUtils
     /// Gets probability of adding standard block
     /// </summary>
     /// <value></value>
-    public static float StandardBlockProbability {
+    public static float StandardBlockProbability
+    {
         get { return configData.StandardBlockProbability; }
     }
-    
+
     /// <summary>
     /// Gets probability of adding bonus block
     /// </summary>
     /// <value></value>
-    public static float BonucBlockProbability {
+    public static float BonucBlockProbability
+    {
         get { return configData.BonucBlockProbability; }
     }
-    
+
     /// <summary>
     /// Gets probability of adding freeze block
     /// </summary>
     /// <value></value>
-    public static float FreezeBlockProbability {
+    public static float FreezeBlockProbability
+    {
         get { return configData.FreezeBlockProbability; }
     }
-    
+
     /// <summary>
     /// Gets probability of adding speed block
     /// </summary>
     /// <value></value>
-    public static float SpeedBlockProbability {
+    public static float SpeedBlockProbability
+    {
         get { return configData.SpeedBlockProbability; }
+    }
+
+    public static int FreezeSeconds
+    {
+        get { return configData.FreezeSeconds; }
     }
 
     #endregion

@@ -40,18 +40,18 @@ public class Block : MonoBehaviour
 
     }
 
-    private void OnCollisionEnter2D(Collision2D other)
+    protected virtual void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.CompareTag("Ball"))
         {
-            // HUD.AddPoints(points);
             pointsAddedEvent.Invoke(points);
             EventManager.RemovePointsAddedInvoker(this);
             Destroy(gameObject);
         }
     }
 
-    public void AddPointsAddedListener(UnityAction<int> listener) {
+    public void AddPointsAddedListener(UnityAction<int> listener)
+    {
         pointsAddedEvent.AddListener(listener);
     }
 

@@ -86,7 +86,7 @@ public class Ball : MonoBehaviour
     }
 
     /// <summary>
-    /// Stops delay timer, starts ball moving
+    /// Stops delay-timer, starts ball moving
     /// </summary>
     private void HandleDelayTimerFinished()
     {

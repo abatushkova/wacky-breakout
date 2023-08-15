@@ -10,6 +10,10 @@ public class Paddle : MonoBehaviour
     float colliderHalfWidth;
     const float BounceAngleHalfRange = 60 * Mathf.Deg2Rad;
 
+    // freeze effect support
+    bool frozen = false;
+    Timer freezeTimer;
+
     #endregion
 
     #region Methods
@@ -20,6 +24,11 @@ public class Paddle : MonoBehaviour
         rb2d = GetComponent<Rigidbody2D>();
         BoxCollider2D bc2d = GetComponent<BoxCollider2D>();
         colliderHalfWidth = bc2d.size.x / 2;
+
+        // freeze timer
+        freezeTimer = gameObject.AddComponent<Timer>();
+        freezeTimer.AddTimerFinishedListener(HandleFreezeTimerFinished);
+        EventManager.AddFreezeListener(HandleFreezeEvent);
     }
 
     // Update is called once per frame
@@ -32,31 +41,13 @@ public class Paddle : MonoBehaviour
     private void FixedUpdate()
     {
         float horizontalInput = Input.GetAxis("Horizontal");
-        if (horizontalInput != 0)
+        if (!frozen && horizontalInput != 0)
         {
             Vector2 position = rb2d.position;
             position.x += horizontalInput * ConfigurationUtils.PaddleMoveUnitsPerSecond * Time.fixedDeltaTime;
             position.x = CalculateClampedX(position.x);
             rb2d.MovePosition(position);
         }
-    }
-
-    /// <summary>
-    /// Calculates an x position to clamp the paddle in the screen
-    /// </summary>
-    /// <param name="x">position x to clamp</param>
-    /// <returns>clamped position x</returns>
-    private float CalculateClampedX(float x)
-    {
-        if (x - colliderHalfWidth < ScreenUtils.ScreenLeft)
-        {
-            x = ScreenUtils.ScreenLeft + colliderHalfWidth;
-        }
-        if (x + colliderHalfWidth > ScreenUtils.ScreenRight)
-        {
-            x = ScreenUtils.ScreenRight - colliderHalfWidth;
-        }
-        return x;
     }
 
     /// <summary>
@@ -96,6 +87,47 @@ public class Paddle : MonoBehaviour
         ContactPoint2D[] contacts = new ContactPoint2D[2];
         collision.GetContacts(contacts);
         return Mathf.Abs(contacts[0].point.y - contacts[1].point.y) < tolerance;
+    }
+
+    /// <summary>
+    /// Calculates an x position to clamp the paddle in the screen
+    /// </summary>
+    /// <param name="x">position x to clamp</param>
+    /// <returns>clamped position x</returns>
+    private float CalculateClampedX(float x)
+    {
+        if (x - colliderHalfWidth < ScreenUtils.ScreenLeft)
+        {
+            x = ScreenUtils.ScreenLeft + colliderHalfWidth;
+        }
+        if (x + colliderHalfWidth > ScreenUtils.ScreenRight)
+        {
+            x = ScreenUtils.ScreenRight - colliderHalfWidth;
+        }
+        return x;
+    }
+
+    /// <summary>
+    /// Unfreezes paddlee, stops freeze-timer
+    /// </summary>
+    private void HandleFreezeTimerFinished() {
+        frozen = false;
+        freezeTimer.Stop();
+    }
+
+    /// <summary>
+    /// Handles freeze-timer event
+    /// </summary>
+    /// <param name="duration"></param>
+    private void HandleFreezeEvent(float duration) {
+        frozen = true;
+        if (!freezeTimer.Running) {
+            freezeTimer.Duration = duration;
+            freezeTimer.Run();
+        }
+        else {
+            freezeTimer.AddTime(duration);
+        }
     }
 
     #endregion

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class EffectBlock : Block
 {
@@ -9,6 +10,8 @@ public class EffectBlock : Block
     [SerializeField] Sprite freezeSprite;
     [SerializeField] Sprite speedSprite;
     EffectName effect;
+    int duration;
+    FreezeEvent freezeEvent;
 
     #endregion
 
@@ -29,6 +32,9 @@ public class EffectBlock : Block
             if (effect == EffectName.Freezer)
             {
                 spriteRenderer.sprite = freezeSprite;
+                duration = ConfigurationUtils.FreezeSeconds;
+                freezeEvent = new FreezeEvent();
+                EventManager.AddFreezeInvoker(this);
             }
             else
             {
@@ -51,7 +57,30 @@ public class EffectBlock : Block
     // Update is called once per frame
     void Update()
     {
+    }
 
+    /// <summary>
+    /// Detects collision with ball
+    /// </summary>
+    /// <param name="other"></param>
+    protected override void OnCollisionEnter2D(Collision2D other) {
+        if (other.gameObject.CompareTag("Ball")) {
+            base.OnCollisionEnter2D(other);
+
+            if (effect == EffectName.Freezer) {
+                freezeEvent.Invoke(duration);
+                EventManager.RemoveFreezeInvoker(this);
+            }
+        }
+    }
+
+    /// <summary>
+    /// Adds given listener to freeze event
+    /// </summary>
+    /// <param name="listener"></param>
+    public void AddFreezeListener(UnityAction<float> listener)
+    {
+        freezeEvent.AddListener(listener);
     }
 
     #endregion

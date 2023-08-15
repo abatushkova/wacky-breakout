@@ -27,6 +27,7 @@ public class ConfigurationData
     float bonusBlockProbability = 0.2f;
     float freezeBlockProbability = 0.05f;
     float speedBlockProbability = 0.05f;
+    int freezeSeconds = 2;
 
     #endregion
 
@@ -155,32 +156,45 @@ public class ConfigurationData
     /// Gets probability of adding standard block
     /// </summary>
     /// <value></value>
-    public float StandardBlockProbability {
+    public float StandardBlockProbability
+    {
         get { return standardBlockProbability; }
     }
-    
+
     /// <summary>
     /// Gets probability of adding bonus block
     /// </summary>
     /// <value></value>
-    public float BonucBlockProbability {
+    public float BonucBlockProbability
+    {
         get { return bonusBlockProbability; }
     }
-    
+
     /// <summary>
     /// Gets probability of adding freeze block
     /// </summary>
     /// <value></value>
-    public float FreezeBlockProbability {
+    public float FreezeBlockProbability
+    {
         get { return freezeBlockProbability; }
     }
-    
+
     /// <summary>
     /// Gets probability of adding speed block
     /// </summary>
     /// <value></value>
-    public float SpeedBlockProbability {
+    public float SpeedBlockProbability
+    {
         get { return speedBlockProbability; }
+    }
+
+    /// <summary>
+    /// Gets seconds of freeze effect
+    /// </summary>
+    /// <value></value>
+    public int FreezeSeconds
+    {
+        get { return freezeSeconds; }
     }
 
     #endregion
@@ -206,6 +220,7 @@ public class ConfigurationData
         bonusBlockProbability = float.Parse(values[10]) / 100;
         freezeBlockProbability = float.Parse(values[11]) / 100;
         speedBlockProbability = float.Parse(values[12]) / 100;
+        freezeSeconds = int.Parse(values[13]);
     }
 
     #endregion
