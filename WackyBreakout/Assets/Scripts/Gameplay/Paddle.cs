@@ -110,7 +110,8 @@ public class Paddle : MonoBehaviour
     /// <summary>
     /// Unfreezes paddlee, stops freeze-timer
     /// </summary>
-    private void HandleFreezeTimerFinished() {
+    private void HandleFreezeTimerFinished()
+    {
         frozen = false;
         freezeTimer.Stop();
     }
@@ -119,13 +120,16 @@ public class Paddle : MonoBehaviour
     /// Handles freeze-timer event
     /// </summary>
     /// <param name="duration"></param>
-    private void HandleFreezeEvent(float duration) {
+    private void HandleFreezeEvent(float duration)
+    {
         frozen = true;
-        if (!freezeTimer.Running) {
+        if (!freezeTimer.Running)
+        {
             freezeTimer.Duration = duration;
             freezeTimer.Run();
         }
-        else {
+        else
+        {
             freezeTimer.AddTime(duration);
         }
     }

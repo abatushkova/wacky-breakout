@@ -141,7 +141,8 @@ public class Timer : MonoBehaviour
     /// Adds given listener to timer-finished event
     /// </summary>
     /// <param name="listener"></param>
-    public void AddTimerFinishedListener(UnityAction listener) {
+    public void AddTimerFinishedListener(UnityAction listener)
+    {
         timerFinishedEvent.AddListener(listener);
     }
 

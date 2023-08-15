@@ -10,7 +10,7 @@ public class GameInitializer : MonoBehaviour
     /// <summary>
     /// Awake is called before Start
     /// </summary>
-	void Awake()
+    void Awake()
     {
         // initialize screen utils, config utils
         ScreenUtils.Initialize();

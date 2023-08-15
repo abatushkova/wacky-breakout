@@ -68,10 +68,10 @@ public static class ScreenUtils
     /// <value>bottom edge of the screen</value>
     public static float ScreenBottom
     {
-        get 
+        get
         {
             CheckScreenSizeChanged();
-            return screenBottom; 
+            return screenBottom;
         }
     }
 

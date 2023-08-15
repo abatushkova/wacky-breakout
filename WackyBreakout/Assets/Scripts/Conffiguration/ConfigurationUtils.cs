@@ -129,9 +129,31 @@ public static class ConfigurationUtils
         get { return configData.SpeedBlockProbability; }
     }
 
-    public static int FreezeSeconds
+    /// <summary>
+    /// Gets duration of freeze effect
+    /// </summary>
+    /// <value></value>
+    public static float FreezeSeconds
     {
         get { return configData.FreezeSeconds; }
+    }
+
+    /// <summary>
+    /// Gets duration of speed effect
+    /// </summary>
+    /// <value></value>
+    public static float SpeedSeconds
+    {
+        get { return configData.SpeedSeconds; }
+    }
+
+    /// <summary>
+    /// Gets speed factor
+    /// </summary>
+    /// <value></value>
+    public static float SpeedFactor
+    {
+        get { return configData.SpeedFactor; }
     }
 
     #endregion

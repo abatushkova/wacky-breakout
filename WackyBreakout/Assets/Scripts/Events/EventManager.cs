@@ -23,9 +23,13 @@ public static class EventManager
     static List<EffectBlock> freezeInvokers = new List<EffectBlock>();
     static List<UnityAction<float>> freezeListeners = new List<UnityAction<float>>();
 
+    // speed effect support
+    static List<EffectBlock> speedInvokers = new List<EffectBlock>();
+    static List<UnityAction<float, float>> speedListeners = new List<UnityAction<float, float>>();
+
     #endregion
 
-    #region Methods
+    #region Ball Died Methods
 
     /// <summary>
     /// Adds all listeners to invoker, invoker to list
@@ -62,6 +66,10 @@ public static class EventManager
         ballDiedInvokers.Remove(invoker);
     }
 
+    #endregion
+
+    #region Ball Lost Methods
+
     /// <summary>
     /// Adds all listeners to invoker, invoker to list
     /// </summary>
@@ -97,13 +105,19 @@ public static class EventManager
         ballLostInvokers.Remove(invoker);
     }
 
+    #endregion
+
+    #region Points AddedMethods
+
     /// <summary>
     /// Adds all listeners to invoker, invoker to list
     /// </summary>
     /// <param name="invoker"></param>
-    public static void AddPointsAddedInvoker(Block invoker) {
+    public static void AddPointsAddedInvoker(Block invoker)
+    {
         pointsAddedInvokers.Add(invoker);
-        foreach (UnityAction<int> listener in pointsAddedListeners) {
+        foreach (UnityAction<int> listener in pointsAddedListeners)
+        {
             invoker.AddPointsAddedListener(listener);
         }
     }
@@ -112,9 +126,11 @@ public static class EventManager
     /// Adds listener to all invokers, listener to list
     /// </summary>
     /// <param name="listener"></param>
-    public static void AddPointsAddedListener(UnityAction<int> listener) {
+    public static void AddPointsAddedListener(UnityAction<int> listener)
+    {
         pointsAddedListeners.Add(listener);
-        foreach (Block invoker in pointsAddedInvokers) {
+        foreach (Block invoker in pointsAddedInvokers)
+        {
             invoker.AddPointsAddedListener(listener);
         }
     }
@@ -123,17 +139,24 @@ public static class EventManager
     /// Removes invoker from list
     /// </summary>
     /// <param name="invoker"></param>
-    public static void RemovePointsAddedInvoker(Block invoker) {
+    public static void RemovePointsAddedInvoker(Block invoker)
+    {
         pointsAddedInvokers.Remove(invoker);
     }
 
+    #endregion
+
+    #region Freeze Methods
+
     /// <summary>
     /// Adds all listeners to invoker, invoker to list
     /// </summary>
     /// <param name="invoker"></param>
-    public static void AddFreezeInvoker(EffectBlock invoker) {
+    public static void AddFreezeInvoker(EffectBlock invoker)
+    {
         freezeInvokers.Add(invoker);
-        foreach (UnityAction<float> listener in freezeListeners) {
+        foreach (UnityAction<float> listener in freezeListeners)
+        {
             invoker.AddFreezeListener(listener);
         }
     }
@@ -142,9 +165,11 @@ public static class EventManager
     /// Adds listener to all invokers, listener to list
     /// </summary>
     /// <param name="listener"></param>
-    public static void AddFreezeListener(UnityAction<float> listener) {
+    public static void AddFreezeListener(UnityAction<float> listener)
+    {
         freezeListeners.Add(listener);
-        foreach (EffectBlock invoker in freezeInvokers) {
+        foreach (EffectBlock invoker in freezeInvokers)
+        {
             invoker.AddFreezeListener(listener);
         }
     }
@@ -153,8 +178,61 @@ public static class EventManager
     /// Removes invoker from list
     /// </summary>
     /// <param name="invoker"></param>
-    public static void RemoveFreezeInvoker(EffectBlock invoker) {
+    public static void RemoveFreezeInvoker(EffectBlock invoker)
+    {
         freezeInvokers.Remove(invoker);
+    }
+
+    #endregion
+
+    #region Speed Methods
+
+    /// <summary>
+    /// Adds all listeners to invoker, invoker to list
+    /// </summary>
+    /// <param name="invoker"></param>
+    public static void AddSpeedInvoker(EffectBlock invoker)
+    {
+        speedInvokers.Add(invoker);
+        foreach (UnityAction<float, float> listener in speedListeners)
+        {
+            invoker.AddSpeedListener(listener);
+        }
+    }
+
+    /// <summary>
+    /// Adds listener to all invokers, listener to list
+    /// </summary>
+    /// <param name="listener"></param>
+    public static void AddSpeedListener(UnityAction<float, float> listener)
+    {
+        speedListeners.Add(listener);
+        foreach (EffectBlock invoker in speedInvokers)
+        {
+            invoker.AddSpeedListener(listener);
+        }
+    }
+
+    /// <summary>
+    /// Removes invoker from list
+    /// </summary>
+    /// <param name="invoker"></param>
+    public static void RemoveSpeedInvoker(EffectBlock invoker)
+    {
+        speedInvokers.Remove(invoker);
+    }
+
+    /// <summary>
+    /// Removes listener from all invokers, listener from list
+    /// </summary>
+    /// <param name="listener"></param>
+    public static void RemoveSpeedListener(UnityAction<float, float> listener)
+    {
+        speedListeners.Remove(listener);
+        foreach (EffectBlock invoker in speedInvokers)
+        {
+            invoker.RemoveSpeedListener(listener);
+        }
     }
 
     #endregion

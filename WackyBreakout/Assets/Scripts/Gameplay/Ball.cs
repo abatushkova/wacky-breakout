@@ -12,6 +12,11 @@ public class Ball : MonoBehaviour
     BallDiedEvent ballDiedEvent = new BallDiedEvent();
     BallLostEvent ballLostEvent = new BallLostEvent();
 
+    // speed support
+    Rigidbody2D rb2d;
+    Timer speedTimer;
+    float speedFactor;
+
     #endregion
 
     #region Private Methods
@@ -30,6 +35,13 @@ public class Ball : MonoBehaviour
         deathTimer.Duration = ConfigurationUtils.BallLifeSeconds;
         deathTimer.Run();
         deathTimer.AddTimerFinishedListener(HandleDeathTimerFinished);
+
+        // start speed timer
+        speedTimer = gameObject.AddComponent<Timer>();
+        speedTimer.AddTimerFinishedListener(HandleSpeedTimerFinished);
+        EventManager.AddSpeedListener(HandleSpeedEvent);
+
+        rb2d = GetComponent<Rigidbody2D>();
 
         EventManager.AddBallDiedInvoker(this);
         EventManager.AddBallLostInvoker(this);
@@ -63,6 +75,13 @@ public class Ball : MonoBehaviour
         Vector2 force = new Vector2(
             ConfigurationUtils.BallImpulseForce * Mathf.Cos(angle),
             ConfigurationUtils.BallImpulseForce * Mathf.Sin(angle));
+
+        if (EffectUtils.SpeedEffectActive)
+        {
+            StartSpeedEffect(EffectUtils.SpeedEffectSecondsLeft, EffectUtils.SpeedFactor);
+            force *= speedFactor;
+        }
+
         GetComponent<Rigidbody2D>().AddForce(force);
     }
 
@@ -73,11 +92,12 @@ public class Ball : MonoBehaviour
     {
         EventManager.RemoveBallDiedInvoker(this);
         EventManager.RemoveBallLostInvoker(this);
+        EventManager.RemoveSpeedListener(HandleSpeedEvent);
         Destroy(gameObject);
     }
 
     /// <summary>
-    /// Invokes death-timer event
+    /// Invokes death timer event
     /// </summary>
     private void HandleDeathTimerFinished()
     {
@@ -86,12 +106,51 @@ public class Ball : MonoBehaviour
     }
 
     /// <summary>
-    /// Stops delay-timer, starts ball moving
+    /// Stops delay timer, starts ball moving
     /// </summary>
     private void HandleDelayTimerFinished()
     {
         delayTimer.Stop();
         StartMoving();
+    }
+
+    /// <summary>
+    /// Returns ball to normal speed
+    /// </summary>
+    private void HandleSpeedTimerFinished()
+    {
+        speedTimer.Stop();
+        rb2d.velocity *= 1 / speedFactor;
+    }
+
+    /// <summary>
+    /// Speeds up ball, adds time to speed timer
+    /// </summary>
+    /// <param name="duration">duration of speed effect</param>
+    /// <param name="speedFactor"></param>
+    private void HandleSpeedEvent(float duration, float speedFactor)
+    {
+        if (!speedTimer.Running)
+        {
+            StartSpeedEffect(duration, speedFactor);
+            rb2d.velocity *= speedFactor;
+        }
+        else
+        {
+            speedTimer.AddTime(duration);
+        }
+    }
+
+    /// <summary>
+    /// Starts speed effect
+    /// </summary>
+    /// <param name="duration">duration of speed effect</param>
+    /// <param name="speedFactor"></param>
+    private void StartSpeedEffect(float duration, float speedFactor)
+    {
+        this.speedFactor = speedFactor;
+        speedTimer.Duration = duration;
+        speedTimer.Run();
     }
 
     #endregion

@@ -43,6 +43,7 @@ public class BallSpawner : MonoBehaviour
         spawnTimer = gameObject.AddComponent<Timer>();
         spawnTimer.Duration = GetSpawnDelay();
         spawnTimer.Run();
+        spawnTimer.AddTimerFinishedListener(HandleSpawnTimerFinished);
 
         // add listeners
         EventManager.AddBallDiedListener(SpawnBall);
@@ -55,15 +56,6 @@ public class BallSpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // spawn ball, restart timer
-        if (spawnTimer.Finished)
-        {
-            retrySpawn = false;
-            SpawnBall();
-            spawnTimer.Duration = GetSpawnDelay();
-            spawnTimer.Run();
-        }
-
         // try again if spawn still pending
         if (retrySpawn)
         {
@@ -85,7 +77,8 @@ public class BallSpawner : MonoBehaviour
     private void SpawnBall()
     {
         // avoid balls collision on spawn
-        if (Physics2D.OverlapArea(spawnLocationMin, spawnLocationMax) == null) {
+        if (Physics2D.OverlapArea(spawnLocationMin, spawnLocationMax) == null)
+        {
             retrySpawn = false;
             Instantiate<GameObject>(prefabBall);
         }
@@ -93,6 +86,17 @@ public class BallSpawner : MonoBehaviour
         {
             retrySpawn = true;
         }
+    }
+
+    /// <summary>
+    /// Prevents stack with spawn still pending
+    /// </summary>
+    private void HandleSpawnTimerFinished()
+    {
+        retrySpawn = false;
+        SpawnBall();
+        spawnTimer.Duration = GetSpawnDelay();
+        spawnTimer.Run();
     }
 
     #endregion

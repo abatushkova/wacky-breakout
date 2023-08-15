@@ -77,10 +77,6 @@ public class LevelBuilder : MonoBehaviour
     /// <param name="position"></param>
     private void PlaceBlock(Vector2 position)
     {
-        // GameObject effectBlockPrefab = Instantiate(prefabEffectBlock, position, Quaternion.identity);
-        // EffectBlock effectBlock = effectBlockPrefab.GetComponent<EffectBlock>();
-        // effectBlock.Effect = EffectName.Freezer;
-
         float randomProbability = Random.value;
         if (randomProbability < standardProbability)
         {

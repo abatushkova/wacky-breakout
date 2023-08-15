@@ -9,9 +9,13 @@ public class EffectBlock : Block
 
     [SerializeField] Sprite freezeSprite;
     [SerializeField] Sprite speedSprite;
+
+    // effects support
     EffectName effect;
-    int duration;
+    float duration;
     FreezeEvent freezeEvent;
+    float speedFactor;
+    SpeedEvent speedEvent;
 
     #endregion
 
@@ -39,6 +43,10 @@ public class EffectBlock : Block
             else
             {
                 spriteRenderer.sprite = speedSprite;
+                duration = ConfigurationUtils.SpeedSeconds;
+                speedFactor = ConfigurationUtils.SpeedFactor;
+                speedEvent = new SpeedEvent();
+                EventManager.AddSpeedInvoker(this);
             }
         }
     }
@@ -57,19 +65,28 @@ public class EffectBlock : Block
     // Update is called once per frame
     void Update()
     {
+
     }
 
     /// <summary>
     /// Detects collision with ball
     /// </summary>
     /// <param name="other"></param>
-    protected override void OnCollisionEnter2D(Collision2D other) {
-        if (other.gameObject.CompareTag("Ball")) {
+    protected override void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.CompareTag("Ball"))
+        {
             base.OnCollisionEnter2D(other);
 
-            if (effect == EffectName.Freezer) {
+            if (effect == EffectName.Freezer)
+            {
                 freezeEvent.Invoke(duration);
                 EventManager.RemoveFreezeInvoker(this);
+            }
+            else if (effect == EffectName.Speedup)
+            {
+                speedEvent.Invoke(duration, speedFactor);
+                EventManager.RemoveSpeedInvoker(this);
             }
         }
     }
@@ -81,6 +98,24 @@ public class EffectBlock : Block
     public void AddFreezeListener(UnityAction<float> listener)
     {
         freezeEvent.AddListener(listener);
+    }
+
+    /// <summary>
+    /// Adds given listener to speed event
+    /// </summary>
+    /// <param name="listener"></param>
+    public void AddSpeedListener(UnityAction<float, float> listener)
+    {
+        speedEvent.AddListener(listener);
+    }
+
+    /// <summary>
+    /// Removes given listener fron speed event
+    /// </summary>
+    /// <param name="listener"></param>
+    public void RemoveSpeedListener(UnityAction<float, float> listener)
+    {
+        speedEvent.RemoveListener(listener);
     }
 
     #endregion
