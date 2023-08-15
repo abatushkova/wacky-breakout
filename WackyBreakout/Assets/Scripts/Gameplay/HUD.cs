@@ -39,6 +39,7 @@ public class HUD : MonoBehaviour
 
         // add listeners
         EventManager.AddBallLostListener(LoseBall);
+        EventManager.AddPointsAddedListener(AddPoints);
     }
 
     // Update is called once per frame
@@ -60,7 +61,7 @@ public class HUD : MonoBehaviour
     /// Add given points to score
     /// </summary>
     /// <param name="points"></param>
-    public static void AddPoints(int points)
+    private void AddPoints(int points)
     {
         score += points;
         scoreText.text = ScorePrefix + score.ToString();

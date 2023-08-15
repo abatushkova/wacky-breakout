@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Block : MonoBehaviour
 {
     #region Fields
 
     int points;
+    PointsAddedEvent pointsAddedEvent = new PointsAddedEvent();
 
     #endregion
 
@@ -26,9 +28,10 @@ public class Block : MonoBehaviour
     #region Methods
 
     // Start is called before the first frame update
-    void Start()
+    protected virtual void Start()
     {
-
+        // add listeners
+        EventManager.AddPointsAddedInvoker(this);
     }
 
     // Update is called once per frame
@@ -41,9 +44,15 @@ public class Block : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Ball"))
         {
-            HUD.AddPoints(points);
+            // HUD.AddPoints(points);
+            pointsAddedEvent.Invoke(points);
+            EventManager.RemovePointsAddedInvoker(this);
             Destroy(gameObject);
         }
+    }
+
+    public void AddPointsAddedListener(UnityAction<int> listener) {
+        pointsAddedEvent.AddListener(listener);
     }
 
     #endregion

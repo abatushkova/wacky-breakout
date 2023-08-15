@@ -13,12 +13,11 @@ public class StandardBlock : Block
     #endregion
 
     // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
-        // set points to standard block
-        Points = ConfigurationUtils.StandardBlockPoints;
+        base.Start();
 
-        // set random sprite
+        Points = ConfigurationUtils.StandardBlockPoints;
         SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
         int spriteNumber = Random.Range(0, 3);
         if (spriteNumber == 0)

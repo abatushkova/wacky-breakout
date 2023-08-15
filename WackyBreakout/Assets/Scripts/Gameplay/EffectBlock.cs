@@ -42,8 +42,9 @@ public class EffectBlock : Block
     #region Methods
 
     // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
+        base.Start();
         Points = ConfigurationUtils.EffectBlockPoints;
     }
 

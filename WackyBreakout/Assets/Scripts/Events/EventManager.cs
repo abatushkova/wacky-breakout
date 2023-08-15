@@ -15,6 +15,10 @@ public static class EventManager
     static List<Ball> ballLostInvokers = new List<Ball>();
     static List<UnityAction> ballLostListeners = new List<UnityAction>();
 
+    // points-add support
+    static List<Block> pointsAddedInvokers = new List<Block>();
+    static List<UnityAction<int>> pointsAddedListeners = new List<UnityAction<int>>();
+
     #endregion
 
     #region Methods
@@ -87,6 +91,36 @@ public static class EventManager
     public static void RemoveBallLostInvoker(Ball invoker)
     {
         ballLostInvokers.Remove(invoker);
+    }
+
+    /// <summary>
+    /// Adds all listeners to invoker, invoker to list
+    /// </summary>
+    /// <param name="invoker"></param>
+    public static void AddPointsAddedInvoker(Block invoker) {
+        pointsAddedInvokers.Add(invoker);
+        foreach (UnityAction<int> listener in pointsAddedListeners) {
+            invoker.AddPointsAddedListener(listener);
+        }
+    }
+
+    /// <summary>
+    /// Adds listener to all invokers, listener to list
+    /// </summary>
+    /// <param name="listener"></param>
+    public static void AddPointsAddedListener(UnityAction<int> listener) {
+        pointsAddedListeners.Add(listener);
+        foreach (Block invoker in pointsAddedInvokers) {
+            invoker.AddPointsAddedListener(listener);
+        }
+    }
+
+    /// <summary>
+    /// Removes invoker from list
+    /// </summary>
+    /// <param name="invoker"></param>
+    public static void RemovePointsAddedInvoker(Block invoker) {
+        pointsAddedInvokers.Remove(invoker);
     }
 
     #endregion
