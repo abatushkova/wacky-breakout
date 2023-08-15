@@ -23,11 +23,13 @@ public class Ball : MonoBehaviour
         delayTimer = gameObject.AddComponent<Timer>();
         delayTimer.Duration = 1;
         delayTimer.Run();
+        delayTimer.AddTimerFinishedListener(HandleDelayTimerFinished);
 
         // start death timer
         deathTimer = gameObject.AddComponent<Timer>();
         deathTimer.Duration = ConfigurationUtils.BallLifeSeconds;
         deathTimer.Run();
+        deathTimer.AddTimerFinishedListener(HandleDeathTimerFinished);
 
         EventManager.AddBallDiedInvoker(this);
         EventManager.AddBallLostInvoker(this);
@@ -36,20 +38,6 @@ public class Ball : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // move ball after delay
-        if (delayTimer.Finished)
-        {
-            delayTimer.Stop();
-            StartMoving();
-        }
-
-        // spawn new ball, destroy prev ball
-        if (deathTimer.Finished)
-        {
-            // Camera.main.GetComponent<BallSpawner>().SpawnBall();
-            // DestroyBall();
-            HandleDeathTimerFinished();
-        }
     }
 
     // Spawn new ball, destroy self when out of game
@@ -60,12 +48,9 @@ public class Ball : MonoBehaviour
             float colliderHalfSize = gameObject.GetComponent<CircleCollider2D>().radius / 2;
             if (transform.position.y - colliderHalfSize < ScreenUtils.ScreenBottom)
             {
-                // HUD.LoseBall();
                 ballLostEvent.Invoke();
-                // Camera.main.GetComponent<BallSpawner>().SpawnBall();
             }
             DestroyBall();
-            // HandleDeathTimerFinished();
         }
     }
 
@@ -74,7 +59,6 @@ public class Ball : MonoBehaviour
     /// </summary>
     private void StartMoving()
     {
-        // get ball moving
         float angle = Random.Range(-90, -100) * Mathf.Rad2Deg;
         Vector2 force = new Vector2(
             ConfigurationUtils.BallImpulseForce * Mathf.Cos(angle),
@@ -85,7 +69,8 @@ public class Ball : MonoBehaviour
     /// <summary>
     /// Destroys ball
     /// </summary>
-    private void DestroyBall() {
+    private void DestroyBall()
+    {
         EventManager.RemoveBallDiedInvoker(this);
         EventManager.RemoveBallLostInvoker(this);
         Destroy(gameObject);
@@ -94,9 +79,19 @@ public class Ball : MonoBehaviour
     /// <summary>
     /// Invokes death-timer event
     /// </summary>
-    private void HandleDeathTimerFinished() {
+    private void HandleDeathTimerFinished()
+    {
         ballDiedEvent.Invoke();
         DestroyBall();
+    }
+
+    /// <summary>
+    /// Stops delay timer, starts ball moving
+    /// </summary>
+    private void HandleDelayTimerFinished()
+    {
+        delayTimer.Stop();
+        StartMoving();
     }
 
     #endregion
@@ -118,7 +113,8 @@ public class Ball : MonoBehaviour
     /// Adds given listener to BallDiedEvent
     /// </summary>
     /// <param name="listener"></param>
-    public void AddBallDiedListener(UnityAction listener) {
+    public void AddBallDiedListener(UnityAction listener)
+    {
         ballDiedEvent.AddListener(listener);
     }
 
@@ -126,7 +122,8 @@ public class Ball : MonoBehaviour
     /// Adds given listener to BallLostEvent
     /// </summary>
     /// <param name="listener"></param>
-    public void AddBallLostListener(UnityAction listener) {
+    public void AddBallLostListener(UnityAction listener)
+    {
         ballLostEvent.AddListener(listener);
     }
 
