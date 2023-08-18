@@ -25,11 +25,25 @@ public static class EventManager
 
     // speed effect support
     static List<EffectBlock> speedInvokers = new List<EffectBlock>();
-    static List<UnityAction<float, float>> speedListeners = new List<UnityAction<float, float>>();
+    static List<UnityAction<float, float>> speedListeners =
+        new List<UnityAction<float, float>>();
+
+    // game started support
+    static List<DifficultyMenu> gameStartedInvokers = new List<DifficultyMenu>();
+    static List<UnityAction<DifficultyName>> gameStartedListeners =
+        new List<UnityAction<DifficultyName>>();
+
+    // last ball lost support
+    static List<HUD> lastBallLostInvokers = new List<HUD>();
+    static List<UnityAction> lastBallLostListeners = new List<UnityAction>();
+
+    // block destroyed support
+    static List<Block> blockDestroyedInvokers = new List<Block>();
+    static List<UnityAction> blockDestroyedListeners = new List<UnityAction>();
 
     #endregion
 
-    #region Ball Died Methods
+    #region BallDied methods
 
     /// <summary>
     /// Adds all listeners to invoker, invoker to list
@@ -68,7 +82,7 @@ public static class EventManager
 
     #endregion
 
-    #region Ball Lost Methods
+    #region BallLost methods
 
     /// <summary>
     /// Adds all listeners to invoker, invoker to list
@@ -107,7 +121,7 @@ public static class EventManager
 
     #endregion
 
-    #region Points AddedMethods
+    #region PointsAdded methods
 
     /// <summary>
     /// Adds all listeners to invoker, invoker to list
@@ -146,7 +160,7 @@ public static class EventManager
 
     #endregion
 
-    #region Freeze Methods
+    #region Freeze methods
 
     /// <summary>
     /// Adds all listeners to invoker, invoker to list
@@ -185,7 +199,7 @@ public static class EventManager
 
     #endregion
 
-    #region Speed Methods
+    #region Speed methods
 
     /// <summary>
     /// Adds all listeners to invoker, invoker to list
@@ -233,6 +247,106 @@ public static class EventManager
         {
             invoker.RemoveSpeedListener(listener);
         }
+    }
+
+    #endregion
+
+    #region GameStarted methods
+
+    /// <summary>
+    /// Adds the given script as a game started invoker
+    /// </summary>
+    /// <param name="invoker">invoker</param>
+    public static void AddGameStartedInvoker(DifficultyMenu invoker)
+    {
+        gameStartedInvokers.Add(invoker);
+        foreach (UnityAction<DifficultyName> listener in gameStartedListeners)
+        {
+            invoker.AddGameStartedListener(listener);
+        }
+    }
+
+    /// <summary>
+    /// Adds the given method as a game started listener
+    /// </summary>
+    /// <param name="listener">listener</param>
+    public static void AddGameStartedListener(UnityAction<DifficultyName> listener)
+    {
+        gameStartedListeners.Add(listener);
+        foreach (DifficultyMenu invoker in gameStartedInvokers)
+        {
+            invoker.AddGameStartedListener(listener);
+        }
+    }
+
+    #endregion
+
+    #region LastBallLost methods
+
+    /// <summary>
+    /// Adds the given script as a last ball lost invoker
+    /// </summary>
+    /// <param name="invoker">invoker</param>
+    public static void AddLastBallLostInvoker(HUD invoker)
+    {
+        lastBallLostInvokers.Add(invoker);
+        foreach (UnityAction listener in lastBallLostListeners)
+        {
+            invoker.AddLastBallLostListener(listener);
+        }
+    }
+
+    /// <summary>
+    /// Adds the given method as a last ball lost listener
+    /// </summary>
+    /// <param name="listener">listener</param>
+    public static void AddLastBallLostListener(UnityAction listener)
+    {
+        lastBallLostListeners.Add(listener);
+        foreach (HUD invoker in lastBallLostInvokers)
+        {
+            invoker.AddLastBallLostListener(listener);
+        }
+    }
+
+    #endregion
+
+    #region BlockDestroyed methods
+
+    /// <summary>
+    /// Adds the given script as a block destroyed invoker
+    /// </summary>
+    /// <param name="invoker">invoker</param>
+    public static void AddBlockDestroyedInvoker(Block invoker)
+    {
+        blockDestroyedInvokers.Add(invoker);
+        foreach (UnityAction listener in blockDestroyedListeners)
+        {
+            invoker.AddBlockDestroyedListener(listener);
+        }
+    }
+
+    /// <summary>
+    /// Adds the given method as a block destroyed listener
+    /// </summary>
+    /// <param name="listener">listener</param>
+    public static void AddBlockDestroyedListener(UnityAction listener)
+    {
+        blockDestroyedListeners.Add(listener);
+        foreach (Block invoker in blockDestroyedInvokers)
+        {
+            invoker.AddBlockDestroyedListener(listener);
+        }
+    }
+
+    /// <summary>
+    /// Remove the given script as a block destroyed invoker
+    /// </summary>
+    /// <param name="invoker">invoker</param>
+    public static void RemoveBlockDestroyedInvoker(Block invoker)
+    {
+        // remove invoker from list
+        blockDestroyedInvokers.Remove(invoker);
     }
 
     #endregion
