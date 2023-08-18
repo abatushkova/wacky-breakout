@@ -19,7 +19,7 @@ public class BallSpawner : MonoBehaviour
 
     #endregion
 
-    #region Methods
+    #region Unity methods
 
     // Start is called before the first frame update
     void Start()
@@ -39,7 +39,7 @@ public class BallSpawner : MonoBehaviour
         Destroy(tempBall);
 
         // init, start spawn timer
-        spawnRange = ConfigurationUtils.EasyMaxSpawnSeconds - ConfigurationUtils.EasyMinSpawnSeconds;
+        spawnRange = ConfigurationUtils.MaxSpawnSeconds - ConfigurationUtils.MinSpawnSeconds;
         spawnTimer = gameObject.AddComponent<Timer>();
         spawnTimer.Duration = GetSpawnDelay();
         spawnTimer.Run();
@@ -63,12 +63,16 @@ public class BallSpawner : MonoBehaviour
         }
     }
 
+    #endregion
+
+    #region Private methods
+
     /// <summary>
     /// Gets spawn dela in seconds for next ball spawn
     /// </summary>
     private float GetSpawnDelay()
     {
-        return ConfigurationUtils.EasyMinSpawnSeconds + Random.value * spawnRange;
+        return ConfigurationUtils.MinSpawnSeconds + Random.value * spawnRange;
     }
 
     /// <summary>
@@ -81,6 +85,7 @@ public class BallSpawner : MonoBehaviour
         {
             retrySpawn = false;
             Instantiate<GameObject>(prefabBall);
+            AudioManager.Play(AudioName.BallSpawn);
         }
         else
         {
