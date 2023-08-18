@@ -7,13 +7,12 @@ using UnityEngine;
 /// </summary>
 public class GameInitializer : MonoBehaviour
 {
-    /// <summary>
-    /// Awake is called before Start
-    /// </summary>
+    // Awake is called before Start
     void Awake()
     {
         // initialize screen utils, config utils
         ScreenUtils.Initialize();
         ConfigurationUtils.Initialize();
+        DifficultyUtils.Initialize();
     }
 }
