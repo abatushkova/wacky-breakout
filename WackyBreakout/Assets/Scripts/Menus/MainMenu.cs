@@ -4,13 +4,12 @@ using UnityEngine;
 
 public class MainMenu : MonoBehaviour
 {
-    #region Public Methods
-
     /// <summary>
     /// Goes to difficulty menu
     /// </summary>
     public void GoToDifficultyMenu()
     {
+        AudioManager.Play(AudioName.MenuButtonClick);
         MenuManager.GoToMenu(MenuName.Difficulty);
     }
 
@@ -19,6 +18,7 @@ public class MainMenu : MonoBehaviour
     /// </summary>
     public void ShowHelp()
     {
+        AudioManager.Play(AudioName.MenuButtonClick);
         MenuManager.GoToMenu(MenuName.Help);
     }
 
@@ -27,8 +27,7 @@ public class MainMenu : MonoBehaviour
     /// </summary>
     public void ExitGame()
     {
+        AudioManager.Play(AudioName.MenuButtonClick);
         Application.Quit();
     }
-
-    #endregion
 }

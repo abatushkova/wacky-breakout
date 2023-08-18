@@ -4,15 +4,12 @@ using UnityEngine;
 
 public class HelpMenu : MonoBehaviour
 {
-    #region Public Methods
-
     /// <summary>
     /// Goes to main menu
     /// </summary>
     public void GoBack()
     {
+        AudioManager.Play(AudioName.MenuButtonClick);
         MenuManager.GoToMenu(MenuName.Main);
     }
-
-    #endregion
 }
