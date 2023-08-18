@@ -7,8 +7,12 @@ public class Block : MonoBehaviour
 {
     #region Fields
 
+    // score support
     int points;
     PointsAddedEvent pointsAddedEvent = new PointsAddedEvent();
+
+    // destruction support
+    BlockDestroyedEvent blockDestroyedEvent = new BlockDestroyedEvent();
 
     #endregion
 
@@ -32,6 +36,7 @@ public class Block : MonoBehaviour
     {
         // add listeners
         EventManager.AddPointsAddedInvoker(this);
+        EventManager.AddBlockDestroyedInvoker(this);
     }
 
     // Update is called once per frame
@@ -40,12 +45,18 @@ public class Block : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Destroys the block on collision with a ball
+    /// </summary>
+    /// <param name="other"></param>
     protected virtual void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.CompareTag("Ball"))
         {
             pointsAddedEvent.Invoke(points);
             EventManager.RemovePointsAddedInvoker(this);
+            blockDestroyedEvent.Invoke();
+            EventManager.RemoveBlockDestroyedInvoker(this);
             Destroy(gameObject);
         }
     }
@@ -53,6 +64,11 @@ public class Block : MonoBehaviour
     public void AddPointsAddedListener(UnityAction<int> listener)
     {
         pointsAddedEvent.AddListener(listener);
+    }
+
+    public void AddBlockDestroyedListener(UnityAction listener)
+    {
+        blockDestroyedEvent.AddListener(listener);
     }
 
     #endregion
