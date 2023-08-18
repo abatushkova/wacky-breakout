@@ -23,14 +23,6 @@ public static class ConfigurationUtils
     }
 
     /// <summary>
-    /// Gets the ball impulse force
-    /// </summary>
-    public static float BallImpulseForce
-    {
-        get { return configData.BallImpulseForce; }
-    }
-
-    /// <summary>
     /// Gets seconds the ball lives
     /// </summary>
     /// <value></value>
@@ -40,21 +32,81 @@ public static class ConfigurationUtils
     }
 
     /// <summary>
+    /// Gets the ball impulse force
+    /// </summary>
+    public static float EasyBallImpulseForce
+    {
+        get { return configData.EasyBallImpulseForce; }
+    }
+
+    /// <summary>
     /// Gets min seconds for a ball to spawn
     /// </summary>
     /// <value></value>
-    public static float MinSpawnSeconds
+    public static float EasyMinSpawnSeconds
     {
-        get { return configData.MinSpawnSeconds; }
+        get { return configData.EasyMinSpawnSeconds; }
     }
 
     /// <summary>
     /// Gets max seconds for a ball to spawn
     /// </summary>
     /// <value></value>
-    public static float MaxSpawnSeconds
+    public static float EasyMaxSpawnSeconds
     {
-        get { return configData.MaxSpawnSeconds; }
+        get { return configData.EasyMaxSpawnSeconds; }
+    }
+
+    /// <summary>
+    /// Gets the ball impulse force
+    /// </summary>
+    public static float MediumBallImpulseForce
+    {
+        get { return configData.MediumBallImpulseForce; }
+    }
+
+    /// <summary>
+    /// Gets min seconds for a ball to spawn
+    /// </summary>
+    /// <value></value>
+    public static float MediumMinSpawnSeconds
+    {
+        get { return configData.MediumMinSpawnSeconds; }
+    }
+
+    /// <summary>
+    /// Gets max seconds for a ball to spawn
+    /// </summary>
+    /// <value></value>
+    public static float MediumMaxSpawnSeconds
+    {
+        get { return configData.MediumMaxSpawnSeconds; }
+    }
+
+    /// <summary>
+    /// Gets the ball impulse force
+    /// </summary>
+    public static float HardBallImpulseForce
+    {
+        get { return configData.HardBallImpulseForce; }
+    }
+
+    /// <summary>
+    /// Gets min seconds for a ball to spawn
+    /// </summary>
+    /// <value></value>
+    public static float HardMinSpawnSeconds
+    {
+        get { return configData.HardMinSpawnSeconds; }
+    }
+
+    /// <summary>
+    /// Gets max seconds for a ball to spawn
+    /// </summary>
+    /// <value></value>
+    public static float HardMaxSpawnSeconds
+    {
+        get { return configData.HardMaxSpawnSeconds; }
     }
 
     /// <summary>

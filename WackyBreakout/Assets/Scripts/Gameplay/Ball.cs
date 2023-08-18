@@ -73,8 +73,8 @@ public class Ball : MonoBehaviour
     {
         float angle = Random.Range(-90, -100) * Mathf.Rad2Deg;
         Vector2 force = new Vector2(
-            ConfigurationUtils.BallImpulseForce * Mathf.Cos(angle),
-            ConfigurationUtils.BallImpulseForce * Mathf.Sin(angle));
+            ConfigurationUtils.EasyBallImpulseForce * Mathf.Cos(angle),
+            ConfigurationUtils.EasyBallImpulseForce * Mathf.Sin(angle));
 
         if (EffectUtils.SpeedEffectActive)
         {

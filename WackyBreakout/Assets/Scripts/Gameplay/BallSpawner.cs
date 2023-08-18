@@ -39,7 +39,7 @@ public class BallSpawner : MonoBehaviour
         Destroy(tempBall);
 
         // init, start spawn timer
-        spawnRange = ConfigurationUtils.MaxSpawnSeconds - ConfigurationUtils.MinSpawnSeconds;
+        spawnRange = ConfigurationUtils.EasyMaxSpawnSeconds - ConfigurationUtils.EasyMinSpawnSeconds;
         spawnTimer = gameObject.AddComponent<Timer>();
         spawnTimer.Duration = GetSpawnDelay();
         spawnTimer.Run();
@@ -68,7 +68,7 @@ public class BallSpawner : MonoBehaviour
     /// </summary>
     private float GetSpawnDelay()
     {
-        return ConfigurationUtils.MinSpawnSeconds + Random.value * spawnRange;
+        return ConfigurationUtils.EasyMinSpawnSeconds + Random.value * spawnRange;
     }
 
     /// <summary>

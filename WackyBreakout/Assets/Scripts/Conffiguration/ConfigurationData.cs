@@ -14,11 +14,17 @@ public class ConfigurationData
     const string ConfigDataFileName = "ConfigurationData.csv";
 
     // configuration data
-    float paddleMoveUnitsPerSecond = 10;
-    float ballImpulseForce = 200;
+    float paddleMoveUnitsPerSecond = 15;
     float ballLifeSeconds = 10;
-    float minSpawnSeconds = 5;
-    float maxSpawnSeconds = 10;
+    float easyBallImpulseForce = 200;
+    float easyMinSpawnSeconds = 5;
+    float easyMaxSpawnSeconds = 10;
+    float mediumBallImpulseForce = 300;
+    float mediumMinSpawnSeconds = 3;
+    float mediumMaxSpawnSeconds = 7;
+    float hardBallImpulseForce = 400;
+    float hardMinSpawnSeconds = 2;
+    float hardMaxSpawnSeconds = 5;
     int ballsPerGame = 5;
     int standardBlockPoints = 1;
     int bonusBlockPoints = 2;
@@ -84,15 +90,6 @@ public class ConfigurationData
     }
 
     /// <summary>
-    /// Gets the impulse force to apply to move the ball
-    /// </summary>
-    /// <value>impulse force</value>
-    public float BallImpulseForce
-    {
-        get { return ballImpulseForce; }
-    }
-
-    /// <summary>
     /// Gets the number of seconds the ball lives
     /// </summary>
     /// <value>ball life seconds</value>
@@ -102,21 +99,84 @@ public class ConfigurationData
     }
 
     /// <summary>
+    /// Gets the impulse force to apply to move the ball
+    /// </summary>
+    /// <value>impulse force</value>
+    public float EasyBallImpulseForce
+    {
+        get { return easyBallImpulseForce; }
+    }
+
+    /// <summary>
     /// Gets the minimum number of seconds for a ball spawn
     /// </summary>
     /// <value>minimum spawn seconds</value>
-    public float MinSpawnSeconds
+    public float EasyMinSpawnSeconds
     {
-        get { return minSpawnSeconds; }
+        get { return easyMinSpawnSeconds; }
     }
 
     /// <summary>
     /// Gets the maximum number of seconds for a ball spawn
     /// </summary>
     /// <value>maximum spawn seconds</value>
-    public float MaxSpawnSeconds
+    public float EasyMaxSpawnSeconds
     {
-        get { return maxSpawnSeconds; }
+        get { return easyMaxSpawnSeconds; }
+    }
+
+    /// <summary>
+    /// Gets the impulse force to apply to move the ball
+    /// </summary>
+    /// <value>impulse force</value>
+    public float MediumBallImpulseForce
+    {
+        get { return mediumBallImpulseForce; }
+    }
+
+    /// <summary>
+    /// Gets the minimum number of seconds for a ball spawn
+    /// </summary>
+    /// <value>minimum spawn seconds</value>
+    public float MediumMinSpawnSeconds
+    {
+        get { return mediumMinSpawnSeconds; }
+    }
+
+    /// <summary>
+    /// Gets the maximum number of seconds for a ball spawn
+    /// </summary>
+    /// <value>maximum spawn seconds</value>
+    public float MediumMaxSpawnSeconds
+    {
+        get { return mediumMaxSpawnSeconds; }
+    }
+
+    /// <summary>
+    /// Gets the easy impulse force to apply to move the ball
+    /// </summary>
+    /// <value>impulse force</value>
+    public float HardBallImpulseForce
+    {
+        get { return hardBallImpulseForce; }
+    }
+
+    /// <summary>
+    /// Gets the minimum number of seconds for a ball spawn
+    /// </summary>
+    /// <value>minimum spawn seconds</value>
+    public float HardMinSpawnSeconds
+    {
+        get { return hardMinSpawnSeconds; }
+    }
+
+    /// <summary>
+    /// Gets the maximum number of seconds for a ball spawn
+    /// </summary>
+    /// <value>maximum spawn seconds</value>
+    public float HardMaxSpawnSeconds
+    {
+        get { return hardMaxSpawnSeconds; }
     }
 
     /// <summary>
@@ -229,21 +289,27 @@ public class ConfigurationData
         // code below assumes we know the order
         // in which values appear in input string
         paddleMoveUnitsPerSecond = float.Parse(values[0]);
-        ballImpulseForce = float.Parse(values[1]);
-        ballLifeSeconds = float.Parse(values[2]);
-        minSpawnSeconds = float.Parse(values[3]);
-        maxSpawnSeconds = float.Parse(values[4]);
-        ballsPerGame = int.Parse(values[5]);
-        standardBlockPoints = int.Parse(values[6]);
-        bonusBlockPoints = int.Parse(values[7]);
-        effectBlockPoints = int.Parse(values[8]);
-        standardBlockProbability = float.Parse(values[9]) / 100;
-        bonusBlockProbability = float.Parse(values[10]) / 100;
-        freezeBlockProbability = float.Parse(values[11]) / 100;
-        speedBlockProbability = float.Parse(values[12]) / 100;
-        freezeSeconds = float.Parse(values[13]);
-        speedSeconds = float.Parse(values[14]);
-        speedFactor = float.Parse(values[15]);
+        ballLifeSeconds = float.Parse(values[1]);
+        easyBallImpulseForce = float.Parse(values[2]);
+        easyMinSpawnSeconds = float.Parse(values[3]);
+        easyMaxSpawnSeconds = float.Parse(values[4]);
+        mediumBallImpulseForce = float.Parse(values[5]);
+        mediumMinSpawnSeconds = float.Parse(values[6]);
+        mediumMaxSpawnSeconds = float.Parse(values[7]);
+        hardBallImpulseForce = float.Parse(values[8]);
+        hardMinSpawnSeconds = float.Parse(values[9]);
+        hardMaxSpawnSeconds = float.Parse(values[10]);
+        ballsPerGame = int.Parse(values[11]);
+        standardBlockPoints = int.Parse(values[12]);
+        bonusBlockPoints = int.Parse(values[13]);
+        effectBlockPoints = int.Parse(values[14]);
+        standardBlockProbability = float.Parse(values[15]) / 100;
+        bonusBlockProbability = float.Parse(values[16]) / 100;
+        freezeBlockProbability = float.Parse(values[17]) / 100;
+        speedBlockProbability = float.Parse(values[18]) / 100;
+        freezeSeconds = float.Parse(values[19]);
+        speedSeconds = float.Parse(values[20]);
+        speedFactor = float.Parse(values[21]);
     }
 
     #endregion
