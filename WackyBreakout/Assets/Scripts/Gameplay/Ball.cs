@@ -19,7 +19,7 @@ public class Ball : MonoBehaviour
 
     #endregion
 
-    #region Private Methods
+    #region Unity methods
 
     // Start is called before the first frame update
     void Start()
@@ -47,12 +47,7 @@ public class Ball : MonoBehaviour
         EventManager.AddBallLostInvoker(this);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-    }
-
-    // Spawn new ball, destroy self when out of game
+    // Spawns new ball, destroys self when out of game view
     private void OnBecameInvisible()
     {
         if (!deathTimer.Finished)
@@ -61,20 +56,36 @@ public class Ball : MonoBehaviour
             if (transform.position.y - colliderHalfSize < ScreenUtils.ScreenBottom)
             {
                 ballLostEvent.Invoke();
+                AudioManager.Play(AudioName.BallLost);
             }
             DestroyBall();
         }
     }
+
+    // Plays collision sound effect as appropriate
+    private void OnCollisionEnter2D(Collision2D coll)
+    {
+        if (coll.gameObject.CompareTag("Ball") ||
+            coll.gameObject.CompareTag("Block") ||
+            coll.gameObject.CompareTag("Paddle"))
+        {
+            AudioManager.Play(AudioName.BallCollision);
+        }
+    }
+
+    #endregion
+
+    #region Private methods
 
     /// <summary>
     /// Starts ball moving
     /// </summary>
     private void StartMoving()
     {
-        float angle = Random.Range(-90, -100) * Mathf.Rad2Deg;
+        float angle = Random.Range(-90, -92) * Mathf.Rad2Deg;
         Vector2 force = new Vector2(
-            ConfigurationUtils.EasyBallImpulseForce * Mathf.Cos(angle),
-            ConfigurationUtils.EasyBallImpulseForce * Mathf.Sin(angle));
+            ConfigurationUtils.BallImpulseForce * Mathf.Cos(angle),
+            ConfigurationUtils.BallImpulseForce * Mathf.Sin(angle));
 
         if (EffectUtils.SpeedEffectActive)
         {
@@ -155,7 +166,7 @@ public class Ball : MonoBehaviour
 
     #endregion
 
-    #region Public Methods
+    #region Public methods
 
     /// <summary>
     /// Sets ball direction to given direction
