@@ -82,7 +82,7 @@ public class Timer : MonoBehaviour
 
     #endregion
 
-    #region Methods
+    #region Unity methods
 
     /// <summary>
     /// Update is called once per frame
@@ -100,6 +100,10 @@ public class Timer : MonoBehaviour
             }
         }
     }
+
+    #endregion
+
+    #region Public methods
 
     /// <summary>
     /// Runs the timer

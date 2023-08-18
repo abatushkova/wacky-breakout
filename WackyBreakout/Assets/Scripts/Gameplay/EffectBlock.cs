@@ -53,19 +53,13 @@ public class EffectBlock : Block
 
     #endregion
 
-    #region Methods
+    #region Unity methods
 
     // Start is called before the first frame update
     protected override void Start()
     {
         base.Start();
         Points = ConfigurationUtils.EffectBlockPoints;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 
     /// <summary>
@@ -90,6 +84,10 @@ public class EffectBlock : Block
             }
         }
     }
+
+    #endregion
+
+    #region Public methods
 
     /// <summary>
     /// Adds given listener to freeze event

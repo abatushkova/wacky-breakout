@@ -4,9 +4,15 @@ using UnityEngine;
 
 public class SpeedEffectMonitor : MonoBehaviour
 {
+    #region Fields
+
     // speed effect support
     Timer speedEffectTimer;
     float speedFactor;
+
+    #endregion
+
+    #region Properties
 
     /// <summary>
     /// Gets whether or not the speed effect is active
@@ -35,6 +41,10 @@ public class SpeedEffectMonitor : MonoBehaviour
         get { return speedFactor; }
     }
 
+    #endregion
+
+    #region Methods
+
     /// <summary>
     /// Use this for initialization
     /// </summary>
@@ -62,7 +72,7 @@ public class SpeedEffectMonitor : MonoBehaviour
     /// </summary>
     /// <param name="duration">duration of the speed effect</param>
     /// <param name="speedFactor">the speed factor</param>
-    void HandleSpeedEvent(float duration, float speedFactor)
+    private void HandleSpeedEvent(float duration, float speedFactor)
     {
         // run or add time to timer
         if (!speedEffectTimer.Running)
@@ -76,4 +86,6 @@ public class SpeedEffectMonitor : MonoBehaviour
             speedEffectTimer.AddTime(duration);
         }
     }
+
+    #endregion
 }

@@ -12,6 +12,8 @@ public class StandardBlock : Block
 
     #endregion
 
+    #region Methods
+
     // Start is called before the first frame update
     protected override void Start()
     {
@@ -34,9 +36,5 @@ public class StandardBlock : Block
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
+    #endregion
 }

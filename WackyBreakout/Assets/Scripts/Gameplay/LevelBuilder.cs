@@ -65,12 +65,6 @@ public class LevelBuilder : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     /// <summary>
     /// Places random block at given position
     /// </summary>

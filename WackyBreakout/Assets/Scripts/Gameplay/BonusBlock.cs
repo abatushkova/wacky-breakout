@@ -10,10 +10,4 @@ public class BonusBlock : Block
         base.Start();
         Points = ConfigurationUtils.BonusBlockPoints;
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 }

@@ -16,7 +16,7 @@ public class Paddle : MonoBehaviour
 
     #endregion
 
-    #region Methods
+    #region Unity methods
 
     // Start is called before the first frame update
     void Start()
@@ -29,12 +29,6 @@ public class Paddle : MonoBehaviour
         freezeTimer = gameObject.AddComponent<Timer>();
         freezeTimer.AddTimerFinishedListener(HandleFreezeTimerFinished);
         EventManager.AddFreezeListener(HandleFreezeEvent);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 
     // FixedUpdate is alled 50 times per second
@@ -73,6 +67,10 @@ public class Paddle : MonoBehaviour
             ball.SetDirection(direction);
         }
     }
+
+    #endregion
+
+    #region Private methods
 
     /// <summary>
     /// Checks for collision on paddle top
