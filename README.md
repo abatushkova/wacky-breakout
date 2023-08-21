@@ -23,7 +23,7 @@ The game keeps track of and displays the player’s score and the number of ball
 2. Help Menu - a single page that displays brief game instructions.
 3. Pause Menu - a menu displayed if the player pauses a game, provides options to resume the game or quit to the main menu.
 
-### Game is over
+### Game Over
 When the player has cleared all the blocks on a level, the game ends. The game also ends when the player loses the fifth ball. 
 
 When the game ends, the game displays a message showing the player's final score, then returns to the Main Menu when the player clicks a Quit button.
